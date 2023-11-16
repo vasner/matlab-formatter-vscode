@@ -78,7 +78,7 @@ class Formatter:
         if opened > 0:
             m = pattern.match(line)
             n = len(m.group(2))
-            indent = (n+1) if self.matrixIndent else self.iwidth
+            indent = (n+1) if self.matrixIndent else 0
         elif opened < 0:
             indent = 0
         return (opened, indent)
@@ -458,7 +458,7 @@ def main():
     parser.add_argument('--indentMode', type=int, choices=[1, -1, 0], default=1)
     parser.add_argument('--addSpaces', type=float, choices=[1, 0.5, 0], default=0.5)
     parser.add_argument('--matrixIndent', type=int,  choices=[1, 0], default=1)
-    parser.add_argument('-i','--inplace', action=argparse.BooleanOptionalAction)
+    parser.add_argument('-i', '--inplace', action=argparse.BooleanOptionalAction)
 
     args = parser.parse_args()
  
