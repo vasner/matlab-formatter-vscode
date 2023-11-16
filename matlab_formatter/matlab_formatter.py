@@ -433,18 +433,32 @@ class Formatter:
                 for line in wlines:
                     f.write(line + '\n')
 
+
+def str2bool(v: str) -> bool:
+    """
+    Converts string value to boolean.
+    """
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ("yes", "true", "t", "y", "1"):
+        return True
+    elif v.lower() in ("no", "false", "f", "n", "0"):
+        return False
+    else:
+        raise TypeError(f"Boolean value expected. Current value '{v}' of type '{type(v)}'")
+
+
 def main():
     parser = argparse.ArgumentParser(prog='matlab-formatter')
     parser.add_argument('file', type= str, nargs='+')
     parser.add_argument('--startLine', type=int, default=1)
     parser.add_argument('--endLine', type=int, default=None)
     parser.add_argument('--indentWidth', type=int, default=4)
-    parser.add_argument('--separateBlocks', type=bool, default=True)
+    parser.add_argument('--separateBlocks', type=str2bool, default=True)
     parser.add_argument('--indentMode', type=int, choices=[1, -1, 0], default=1)
     parser.add_argument('--addSpaces', type=float, choices=[1, 0.5, 0], default=0.5)
     parser.add_argument('--matrixIndent', type=int,  choices=[1, 0], default=1)
-    parser.add_argument('-i' ,'--inplace', action=argparse.BooleanOptionalAction)
-
+    parser.add_argument('-i','--inplace', action=argparse.BooleanOptionalAction)
 
     args = parser.parse_args()
  
